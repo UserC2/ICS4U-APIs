@@ -1,0 +1,41 @@
+{
+  "location": {
+    "name": "City",
+    "region": "Province",
+    "country": "Country",
+    "lat": 0,
+    "lon": 0,
+    "tz_id": "Continent/City",
+    "localtime_epoch": 0,
+    "localtime": "YYYY-MM-DD HH:MM"
+  },
+  "current": {
+    "last_updated_epoch": 0,
+    "last_updated": "YYYY-MM-DD HH:MM",
+    "temp_c": 0,
+    "temp_f": 0,
+    "is_day": 1,
+    "condition": {
+      "text": "Sunny",
+      "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+      "code": 1000
+    },
+    "wind_mph": 0,
+    "wind_kph": 0,
+    "wind_degree": 0,
+    "wind_dir": "N",
+    "pressure_mb": 0,
+    "pressure_in": 0,
+    "precip_mm": 0,
+    "precip_in": 0,
+    "humidity": 0,
+    "cloud": 0,
+    "feelslike_c": 0,
+    "feelslike_f": 0,
+    "vis_km": 0,
+    "vis_miles": 0,
+    "uv": 0,
+    "gust_mph": 0,
+    "gust_kph": 0
+  }
+}
