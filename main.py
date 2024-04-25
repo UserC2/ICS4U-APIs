@@ -1,10 +1,14 @@
 import requests
 
-req = requests.get("https://whatthecommit.com/index.txt")
+# should check for file failure or invalid format
+key_file = open("key", "r")
+key = key_file.readlines()[0]
+# print(key)
 
-# won't catch no-wifi errors
-if (req.status_code != 200):
-  print("failure")
-  exit()
+# should check for request failure
+latlong = requests.get("https://ipinfo.io/loc")
+print(latlong.text)
 
-print(req.text)
+# should check for request failure
+weather = requests.get(f"https://api.weatherapi.com/v1/current.json?key={key}&q={latlong.text}&aqi=no")
+print(weather.text)
