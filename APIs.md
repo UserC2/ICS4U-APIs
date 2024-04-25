@@ -1,8 +1,9 @@
+# Web APIs
 ## What is a Web API?
 An Web API is a way for a computer program to get information from a different computer. Usually, the computer provides information that the program won't be able to access by itself, such as the current weather in a particular city. 
 
 ## NextBus API
-The NextBus API could be used for several different purposes related to public transit:
+The [NextBus API](https://gist.github.com/grantland/7cf4097dd9cdf0dfed14) could be used for several different purposes related to public transit:
 * Tracking the position of public transit vehicles to determine where they spent the most time at, which could help with:
   * Determining the location of traffic jams
   * Identifying poorly designed intersections, which could be used by city planners to improve infrastructure or by the public transit service to plan routes that bypass them to save time
@@ -13,8 +14,7 @@ The NextBus API could be used for several different purposes related to public t
 The NextBus API is a REST API, providing both JSON and XML files.
 
 The NextBus API is described [here](https://gist.github.com/grantland/7cf4097dd9cdf0dfed14).
-* To specify the data you want, add `?command=dataRequested` to the URL.
-* Some commands require arguments. To add an argument, add `&argumentName=argumentValue`.
+* To specify the data you want, add a `command=dataRequested` argument to the URL.
 
 Base URL:
 * JSON: `http://webservices.nextbus.com/service/publicJSONFeed`
@@ -27,13 +27,24 @@ The WhatTheCommit API is a REST API, providing a random commit message whenever 
 
 URL: `https://whatthecommit.com/index.txt`
 
-## GraphQL Weather API
-The GraphQL Weather API is a GraphQL wrapper for the [OpenWeather Weather API](https://openweathermap.org/api).
+## Weather API
+The [Weather API](https://www.weatherapi.com) can be used for any purpose requiring weather data, such as:
+* Get weather predictions and display them to the user so they can dress appropriately
+* Get current wind conditions at a particular location to calculate the trajectory of a flying disk
+* Get historical weather data to visualize weather trends (e.g. showing the average temperature of each region in Canada overlaid on a map)
 
-The GraphQL Weather API can be used to make a weather app that get weather for a particular location, which can be used to help plan the user's day.
+The Weather API is a REST API, requiring an API key to connect.
+* To specify the type of service, append `/service_name.extension` to the URL.
+  * `extension` may be `json` or `xml`.
+* Specify your key with a `key` argument after the URL.
 
-The GraphQL Weather API is accessible through GraphQL.
-
-yeah but it doesnt work
+Base URL: `https://api.weatherapi.com/v1`
 
 ## GitHub
+
+# URL Tips
+A `?` is used after a URL to specify arguments to pass to an API
+* e.g. `https://api.weatherapi.com/v1/current.json?key=12345678`
+
+A `&` is used to seperate each argument
+* e.g. `https://api.weatherapi.com/v1/current.json?key=12345678&q=New York&aqi=no`
