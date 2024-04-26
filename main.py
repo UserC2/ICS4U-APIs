@@ -1,5 +1,21 @@
+import cmath
 import json
+import math
+import matplotlib.pyplot as plt
 import requests
+
+# move to seperate file for organization
+def to_rect(r, angle):
+    angle = math.radians(angle)
+    x = r * math.cos(angle)
+    y = r * math.sin(angle)
+    return [x, y]
+
+def add_vect(a, b):
+    x = a[0] + b[0]
+    y = a[1] + b[1]
+    print(f"x {x} y {y}")
+    return [x, y]
 
 # should check for file failure or invalid format
 key_file = open("key", "r")
@@ -18,3 +34,27 @@ weather = json.loads(weather_request.text)
 wind_kph = weather["current"]["wind_kph"]
 wind_heading = weather["current"]["wind_degree"]
 print(f"Wind Speed KM/H {wind_kph}, Wind Heading {wind_heading}°")
+
+disc_kph = float(input("Enter Disk Speed KM/H: "))
+disc_heading = float(input("Enter Compass Heading (°): "))
+
+# print(f"Disc Speed KM/H {disc_kph}, Disc Heading {disc_heading}°")
+
+wind = to_rect(wind_kph, wind_heading)
+disc = to_rect(disc_kph, disc_heading)
+uncorrected = add_vect(disc, wind)
+
+if False:
+    plt.quiver([0, 0, 0], [0, 0, 0], [wind[0], disc[0], uncorrected[0]], [wind[1], disc[1], uncorrected[0]], color=["g", "r", "b"], angles="xy", scale_units="xy", scale=1)
+    max = max(max(wind), max(disc), max(uncorrected))
+    plt.xlim(-max, max)
+    plt.ylim(-max, max)
+    plt.show()
+
+uncorrected_angle = math.degrees(math.atan2(uncorrected[1], uncorrected[0]))
+disc_angle = math.degrees(math.atan2(disc[1], disc[0]))
+
+correction = disc_angle - uncorrected_angle
+corrected_angle = disc_angle + correction
+print(f"Heading Correction: {correction}°")
+print(f"Corrected Heading: {corrected_angle}°")
