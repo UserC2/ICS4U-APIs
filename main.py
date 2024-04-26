@@ -14,7 +14,6 @@ def to_rect(r, angle):
 def add_vect(a, b):
     x = a[0] + b[0]
     y = a[1] + b[1]
-    print(f"x {x} y {y}")
     return [x, y]
 
 # should check for file failure or invalid format
@@ -33,12 +32,12 @@ weather_request = requests.get(f"https://api.weatherapi.com/v1/current.json?key=
 weather = json.loads(weather_request.text)
 wind_kph = weather["current"]["wind_kph"]
 wind_heading = weather["current"]["wind_degree"]
-print(f"Wind Speed KM/H {wind_kph}, Wind Heading {wind_heading}°")
+print(f"Wind Speed {wind_kph:.1f} KM/H, Wind Heading {wind_heading:.1f}°")
 
 disc_kph = float(input("Enter Disk Speed KM/H: "))
 disc_heading = float(input("Enter Compass Heading (°): "))
 
-# print(f"Disc Speed KM/H {disc_kph}, Disc Heading {disc_heading}°")
+# print(f"Disc Speed {disc_kph:.1f} KM/H, Disc Heading {disc_heading:.1f}°")
 
 wind = to_rect(wind_kph, wind_heading)
 disc = to_rect(disc_kph, disc_heading)
@@ -56,5 +55,5 @@ disc_angle = math.degrees(math.atan2(disc[1], disc[0]))
 
 correction = disc_angle - uncorrected_angle
 corrected_angle = disc_angle + correction
-print(f"Heading Correction: {correction}°")
-print(f"Corrected Heading: {corrected_angle}°")
+print(f"Heading Correction: {correction:.1f}°")
+print(f"Corrected Heading: {corrected_angle:.1f}°")
