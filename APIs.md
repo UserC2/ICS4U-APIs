@@ -41,6 +41,18 @@ The Weather API is a REST API, requiring an API key to connect.
 Base URL: `https://api.weatherapi.com/v1`
 
 ## GitHub
+GitHub's API can be used to automate project-tracking tasks. For example, it could be used to automatically file issues from a Google Form for product users that are not familiar with GitHub's user interface.
+
+### Usage
+GitHub has a REST and GraphQL API.
+
+REST:
+* Change `www` to `api` in the URL for the item you want to access. For example:
+* `https://api.github.com/UserC2/ICS4U-APIs/issues`
+
+GraphQL:
+* The same URL is used for all GraphQL requests:
+* `https://api.github.com/graphql`
 
 # URL Tips
 A `?` is used after a URL to specify arguments to pass to an API
