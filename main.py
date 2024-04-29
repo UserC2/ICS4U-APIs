@@ -11,11 +11,14 @@ def try_request(request):
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
 
-# should check for file failure or invalid format
-key_file = open("key", "r")
-key = key_file.readlines()[0]
-if print_debug:
-    print(f"API Key: {key}")
+try:
+    key_file = open("key", "r")
+    key = key_file.readlines()[0]
+    if print_debug:
+        print(f"API Key: {key}")
+except OSError as e:
+    print("File Error with Weather API key.")
+    raise SystemExit(e)
 
 latlong = try_request("https://ipinfo.io/loc")
 if print_debug:
