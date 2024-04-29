@@ -48,10 +48,7 @@ if input("Show plot (Y/N)? ").lower().strip() == 'y':
     plt.ylim(-max, max)
     plt.show()
 
-uncorrected_angle = math.degrees(uncorrected.degrees)
-disc_angle = math.degrees(disc.degrees)
-
-correction = disc_angle - uncorrected_angle
-corrected_angle = disc_angle + correction
+correction = disc.degrees - uncorrected.degrees
+corrected_angle = disc.degrees + correction
 print(f"Heading Correction: {correction:.1f}°")
 print(f"Corrected Heading: {corrected_angle:.1f}°")
