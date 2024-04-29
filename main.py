@@ -2,20 +2,9 @@ import json
 import math
 import matplotlib.pyplot as plt
 import requests
+import vector
 
 print_debug = False
-
-# move to seperate file for organization
-def to_rect(r, angle):
-    angle = math.radians(angle)
-    x = r * math.cos(angle)
-    y = r * math.sin(angle)
-    return [x, y]
-
-def add_vect(a, b):
-    x = a[0] + b[0]
-    y = a[1] + b[1]
-    return [x, y]
 
 # should check for file failure or invalid format
 key_file = open("key", "r")
@@ -44,19 +33,23 @@ disc_heading = float(input("Enter Compass Heading (°): "))
 if print_debug:
     print(f"Disc Speed {disc_kph:.1f} KM/H, Disc Heading {disc_heading:.1f}°")
 
-wind = to_rect(wind_kph, wind_heading)
-disc = to_rect(disc_kph, disc_heading)
-uncorrected = add_vect(disc, wind)
+wind = vector.Vector(wind_kph, wind_heading)
+disc = vector.Vector(disc_kph, disc_heading)
+uncorrected = wind.add(disc)
 
+# ask user if they want a visual before plotting
 if False:
-    plt.quiver([0, 0, 0], [0, 0, 0], [wind[0], disc[0], uncorrected[0]], [wind[1], disc[1], uncorrected[0]], color=["g", "r", "b"], angles="xy", scale_units="xy", scale=1)
-    max = max(max(wind), max(disc), max(uncorrected))
+    rect_wind = wind.as_rect()
+    rect_disc = disc.as_rect()
+    rect_uncorrected = uncorrected.as_rect()
+    plt.quiver([0, 0, 0], [0, 0, 0], [rect_wind[0], rect_disc[0], rect_uncorrected[0]], [rect_wind[1], rect_disc[1], rect_uncorrected[0]], color=["g", "r", "b"], angles="xy", scale_units="xy", scale=1)
+    max = max(max(rect_wind), max(rect_disc), max(rect_uncorrected))
     plt.xlim(-max, max)
     plt.ylim(-max, max)
     plt.show()
 
-uncorrected_angle = math.degrees(math.atan2(uncorrected[1], uncorrected[0]))
-disc_angle = math.degrees(math.atan2(disc[1], disc[0]))
+uncorrected_angle = math.degrees(uncorrected.degrees)
+disc_angle = math.degrees(disc.degrees)
 
 correction = disc_angle - uncorrected_angle
 corrected_angle = disc_angle + correction
