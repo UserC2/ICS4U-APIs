@@ -15,5 +15,9 @@ Well, worry not! This program will calculate the angle offset necessary for you 
 
 (As a result of these assumptions, UserC2™ is not responsible if you throw the frisbee and it hits a random passer-by instead of going to your friend.)
 
+## API Key
+* The Weather API requires an API key.
+* Place the API key in a file named `key`.
+
 ## Notes
 *I do not actually have a trademark on my username, sorry.*
