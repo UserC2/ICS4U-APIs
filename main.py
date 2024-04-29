@@ -37,8 +37,7 @@ wind = vector.Vector(wind_kph, wind_heading)
 disc = vector.Vector(disc_kph, disc_heading)
 uncorrected = wind.add(disc)
 
-# ask user if they want a visual before plotting
-if True:
+if input("Show plot (Y/N)? ").lower().strip() == 'y':
     # show colours in legend
     plotable_wind = wind.as_plotable().as_rect()
     plotable_disc = disc.as_plotable().as_rect()
