@@ -3,6 +3,8 @@ import math
 import matplotlib.pyplot as plt
 import requests
 
+print_debug = False
+
 # move to seperate file for organization
 def to_rect(r, angle):
     angle = math.radians(angle)
@@ -18,15 +20,18 @@ def add_vect(a, b):
 # should check for file failure or invalid format
 key_file = open("key", "r")
 key = key_file.readlines()[0]
-# print(key)
+if print_debug:
+    print(f"API Key: {key}")
 
 # should check for request failure
 latlong = requests.get("https://ipinfo.io/loc")
-# print(latlong.text)
+if print_debug:
+    print(f"Latitude & Longitude: {latlong.text}")
 
 # should check for request failure
 weather_request = requests.get(f"https://api.weatherapi.com/v1/current.json?key={key}&q={latlong.text}&aqi=no")
-# print(weather_request.text)
+if print_debug:
+    print(f"Weather Request JSON:\n{weather_request.text}")
 
 weather = json.loads(weather_request.text)
 wind_kph = weather["current"]["wind_kph"]
@@ -36,7 +41,8 @@ print(f"Wind Speed {wind_kph:.1f} KM/H, Wind Heading {wind_heading:.1f}°")
 disc_kph = float(input("Enter Disk Speed KM/H: "))
 disc_heading = float(input("Enter Compass Heading (°): "))
 
-# print(f"Disc Speed {disc_kph:.1f} KM/H, Disc Heading {disc_heading:.1f}°")
+if print_debug:
+    print(f"Disc Speed {disc_kph:.1f} KM/H, Disc Heading {disc_heading:.1f}°")
 
 wind = to_rect(wind_kph, wind_heading)
 disc = to_rect(disc_kph, disc_heading)
