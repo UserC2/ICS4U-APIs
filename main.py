@@ -1,5 +1,4 @@
 import json
-import math
 import matplotlib.pyplot as plt
 import requests
 import vector
