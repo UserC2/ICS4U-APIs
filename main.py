@@ -6,19 +6,23 @@ import vector
 
 print_debug = False
 
+def try_request(request):
+    try:
+        return requests.get(request)
+    except requests.exceptions.RequestException as e:
+        raise SystemExit(e)
+
 # should check for file failure or invalid format
 key_file = open("key", "r")
 key = key_file.readlines()[0]
 if print_debug:
     print(f"API Key: {key}")
 
-# should check for request failure
-latlong = requests.get("https://ipinfo.io/loc")
+latlong = try_request("https://ipinfo.io/loc")
 if print_debug:
     print(f"Latitude & Longitude: {latlong.text}")
 
-# should check for request failure
-weather_request = requests.get(f"https://api.weatherapi.com/v1/current.json?key={key}&q={latlong.text}&aqi=no")
+weather_request = try_request(f"https://api.weatherapi.com/v1/current.json?key={key}&q={latlong.text}&aqi=no")
 if print_debug:
     print(f"Weather Request JSON:\n{weather_request.text}")
 
