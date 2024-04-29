@@ -39,10 +39,11 @@ uncorrected = wind.add(disc)
 
 # ask user if they want a visual before plotting
 if True:
+    # show colours in legend
     plotable_wind = wind.as_plotable().as_rect()
     plotable_disc = disc.as_plotable().as_rect()
     plotable_uncorrected = uncorrected.as_plotable().as_rect()
-    plt.quiver([0, 0, 0], [0, 0, 0], [plotable_wind[0], plotable_disc[0], plotable_uncorrected[0]], [plotable_wind[1], plotable_disc[1], plotable_uncorrected[0]], color=["g", "r", "b"], angles="xy", scale_units="xy", scale=1)
+    plt.quiver([0, 0, 0], [0, 0, 0], [plotable_wind[0], plotable_disc[0], plotable_uncorrected[0]], [plotable_wind[1], plotable_disc[1], plotable_uncorrected[0]], color=["b", "orange", "r"], angles="xy", scale_units="xy", scale=1)
     max = max(max(plotable_wind), max(plotable_disc), max(plotable_uncorrected))
     plt.xlim(-max, max)
     plt.ylim(-max, max)
