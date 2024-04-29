@@ -42,14 +42,16 @@ disc = vector.Vector(disc_kph, disc_heading)
 uncorrected = wind.add(disc)
 
 if input("Show plot (Y/N)? ").lower().strip() == 'y':
-    # show colours in legend
     plotable_wind = wind.as_plotable().as_rect()
     plotable_disc = disc.as_plotable().as_rect()
     plotable_uncorrected = uncorrected.as_plotable().as_rect()
-    plt.quiver([0, 0, 0], [0, 0, 0], [plotable_wind[0], plotable_disc[0], plotable_uncorrected[0]], [plotable_wind[1], plotable_disc[1], plotable_uncorrected[0]], color=["b", "orange", "r"], angles="xy", scale_units="xy", scale=1)
+    v1 = plt.quiver(0, 0, plotable_wind[0], plotable_wind[1], color="b", label="Wind", angles="xy", scale_units="xy", scale=1)
+    v2 = plt.quiver(0, 0, plotable_disc[0], plotable_disc[1], color="orange", label="Disc", angles="xy", scale_units="xy", scale=1)
+    v3 = plt.quiver(0, 0, plotable_uncorrected[0], plotable_uncorrected[1], color="r", label="Uncorrected Path", angles="xy", scale_units="xy", scale=1)
     max = max(max(plotable_wind), max(plotable_disc), max(plotable_uncorrected))
     plt.xlim(-max, max)
     plt.ylim(-max, max)
+    plt.legend()
     plt.show()
 
 correction = disc.degrees - uncorrected.degrees
